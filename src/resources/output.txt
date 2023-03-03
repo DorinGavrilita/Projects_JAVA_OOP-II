@@ -1,0 +1,13 @@
+FILE HANDLING IS AN IMPORTANT PART OF ANY APPLICATION. JAVA HAS SEVERAL METHODS FOR CREATING, READING, UPDATING, AND DELETING FILES. TO USE THE FILE CLASS, CREATE AN OBJECT OF THE CLASS, AND SPECIFY THE FILENAME OR DIRECTORY NAME.
+ 
+file handling is an important part of any application. java has several methods for creating, reading, updating, and deleting files. to use the file class, create an object of the class, and specify the filename or directory name.
+ 
+Length of the string = 230
+Vowels: 71
+Consonants: 114
+ 
+Number of words in a phrase: 38
+ 
+The longest word is: application.
+The shortest word is: is
+ 

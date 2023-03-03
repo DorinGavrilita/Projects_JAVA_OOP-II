@@ -1,0 +1,1 @@
+File handling is an important part of any application. Java has several methods for creating, reading, updating, and deleting files. To use the File class, create an object of the class, and specify the filename or directory name.

@@ -10,12 +10,12 @@ public class StringUsage {
         Scanner scanner = new Scanner(System.in);
 */
 
-        try {
-            // Чтение фразы из файла input.txt
-            BufferedReader reader = new BufferedReader(new FileReader("src/resources/input.txt"));
-            String phrase = reader.readLine();
-            reader.close();
+        // Чтение фразы из файла input.txt
+        BufferedReader reader = new BufferedReader(new FileReader("src/resources/input.txt"));
+        String phrase = reader.readLine();
+        reader.close();
 
+        try {
             // Преобразование фразы...
             String resultUpperCase = toUpperCase(phrase);
             String resultLowerCase = toLowerCase(phrase);
@@ -25,7 +25,7 @@ public class StringUsage {
             int resultCons = countConsonants(phrase);
             int resultNumberOfWords = countTheNumberOfWords(phrase);
             String resultMinMax = maxMinWord(phrase);
-            FindDuplicateWords(phrase);
+            String resultDuplicateWords = FindDuplicateWords(phrase);
             allInclusive();
 
             // Запись результата в файл output.txt
@@ -37,6 +37,7 @@ public class StringUsage {
             writer.write("Consonants: " + resultCons + "\n \n");
             writer.write("Number of words in a phrase: " + resultNumberOfWords + "\n \n");
             writer.write(resultMinMax + "\n \n");
+            writer.write(resultDuplicateWords + "\n \n");
             writer.close();
 
             System.out.println("Преобразование выполнено успешно!");
@@ -149,8 +150,25 @@ public class StringUsage {
     }
 
 
-    public static void FindDuplicateWords(String input) {
-        // Разбиваем строку на слова
+    public static String FindDuplicateWords(String input) {
+        String[] words = input.split("\\s+"); // split input string into words
+
+        Set<String> uniqueWords = new HashSet<>();
+        Set<String> repeatedWords = new HashSet<>();
+
+        for (String word : words) {
+            if (!uniqueWords.add(word)) { // add() returns false if element already exists
+                repeatedWords.add(word);
+            }
+        }
+
+        StringBuilder resultBuilder = new StringBuilder();
+        for (String word : repeatedWords) {
+            resultBuilder.append(word).append('\n');
+        }
+        return resultBuilder.toString();
+
+        /*// Разбиваем строку на слова
         String[] words = input.split(" ");
 
         // Создаем Map, чтобы хранить количество вхождений каждого слова в строке
@@ -172,12 +190,11 @@ public class StringUsage {
             if (entry.getValue() > 1) {
                 System.out.println(entry.getKey() + " - occurs: " + entry.getValue() + " times.");
             }
-        }
-
+        }*/
     }
 
     public static void allInclusive() {
-        File myObj = new File("resources/input.txt");
+        File myObj = new File("src/resources/input.txt");
         if (myObj.exists()) {
             System.out.println("File name: " + myObj.getName());
             System.out.println("Absolute path: " + myObj.getAbsolutePath());

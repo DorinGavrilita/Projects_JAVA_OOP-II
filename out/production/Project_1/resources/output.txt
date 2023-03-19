@@ -11,3 +11,11 @@ Number of words in a phrase: 38
 The longest word is: application.
 The shortest word is: is
  
+the
+and
+of
+class,
+File
+an
+
+ 

@@ -2,8 +2,6 @@ package collections;
 
 import java.io.*;
 import java.text.*;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CollectionsUsage {
@@ -25,27 +23,34 @@ public class CollectionsUsage {
         System.out.println();
         ArrayList<String> firstNames = extractFirstNames(clients);
         System.out.println("Distinct first names of employees:");
+        int i = 1;
         for (String firstName : firstNames) {
-            System.out.println(firstName);
+            System.out.println(i + " \t" + firstName);
+            i++;
         }
+        System.out.println('\n');
     }
 
     private static void addClientsAge(String inputFileName, String outputFileName) {
+        ArrayList<String> clients = readClientsFromFile(inputFileName);
+        Collections.sort(clients);
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> originalLines = readClientsFromFile(inputFileName);
-        Collections.sort(originalLines);
-        ArrayList<String> modifiedLines = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        ArrayList<String> modifiedClients = new ArrayList<>();
         System.out.print("Enter the date of birth (dd/MM/yyyy) for:");
-        for (String line : originalLines) {
-            String[] name = line.split(" ");
-            System.out.print("\n\t" + name[0] + " " + name[1] + " ");
-            String dateString = scanner.nextLine();
-            LocalDate birthDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            Period age = Period.between(birthDate, LocalDate.now());
-            String modifiedLine = line + "|" + birthDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "|" + age.getYears();
-            modifiedLines.add(modifiedLine);
+        for (String client : clients) {
+            System.out.print("\t" + client + " ");
+            String dateStr = scanner.nextLine();
+            try {
+                Date dob = dateFormat.parse(dateStr);
+                int age = calculateAge(dob);
+                String modifiedClient = client + " " + dateFormat.format(dob) + "| " + age;
+                modifiedClients.add(modifiedClient);
+            } catch (ParseException e) {
+                System.out.println("Invalid date format. Skipping client " + client);
+            }
         }
-        writeClientData(modifiedLines, outputFileName);
+        writeClientData(modifiedClients, outputFileName);
     }
 
 
@@ -95,7 +100,16 @@ public class CollectionsUsage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Client-final.txt file has been updated successfully.");
     }
 
+    private static int calculateAge(Date dob) {
+        Date now = new Date();
+        int age = now.getYear() - dob.getYear();
+        if (now.getMonth() < dob.getMonth() || (now.getMonth() == dob.getMonth() && now.getDay() < dob.getDay())) {
+            age--;
+        }
+        return age;
+    }
 
 }

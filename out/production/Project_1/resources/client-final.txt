@@ -1,22 +1,6 @@
-Catalin| Diacov||28/04/2001|21
-Christopher| Brown||09/12/1985|37
-Crictian| Pogor||20/07/2002|20
-David| Martin||04/09/1998|24
-Dorin| Gavrilita||15/02/2002|21
-Dumitru| Cojocari||22/01/2002|21
-Ekaterina| Davidov||03/10/2002|20
-Emily| Clark||27/08/1975|47
-Ilona| Frasiniuc||18/11/2002|20
-James| Davis||06/04/1945|78
-Jessica| Hernandez||14/09/1999|23
-John| Smith||30/05/1968|54
-Karen| Thompson||17/06/1992|30
-Mary| Johnson||03/03/1988|35
-Mihai| Smoleac||12/10/2002|20
-Nicolai| Driga||29/07/2001|21
-Nicolai| Russu||16/04/2002|20
-Robert| Wilson||25/11/1977|45
-Sarah| Lee||23/07/1986|36
-Valentin| Caminceanu||24/06/2002|20
-Valentin| Samciucov||07/12/2001|21
-Vlad| Maximenco||21/07/2002|20
+Catalin Diacov|25/04/2010| 13 
+Christopher Brown|08/04/8895| -6872 
+Crictian Pogor|08/04/8895| -6872 
+David Martin|08/04/8895| -6872 
+Dorin Gavrilita|08/04/8895| -6872 
+Dumitru Cojocari|08/04/8895| -6872 

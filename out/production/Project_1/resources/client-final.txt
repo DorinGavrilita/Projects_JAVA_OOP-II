@@ -1,6 +1,4 @@
-Catalin Diacov|25/04/2010| 13 
-Christopher Brown|08/04/8895| -6872 
-Crictian Pogor|08/04/8895| -6872 
-David Martin|08/04/8895| -6872 
-Dorin Gavrilita|08/04/8895| -6872 
-Dumitru Cojocari|08/04/8895| -6872 
+Catalin Diacov| 28/06/2001| 21
+Christopher Brown| 12/04/1987| 36
+Crictian Pogor| 22/10/2002| 20
+Dorin Gavrilita| 15/02/2002| 21

@@ -7,10 +7,31 @@ import java.util.*;
 public class CollectionsUsage {
 
     public static void main(String[] args) {
-        String inputFileName = "D:\\Dorin\\USARB\\POO II\\Java\\Project_1\\src\\resources\\client-input.txt";
-        String outputFileName = "D:\\Dorin\\USARB\\POO II\\Java\\Project_1\\src\\resources\\client-final.txt";
-        listOfClientNames(inputFileName);
-        addClientsAge(inputFileName, outputFileName);
+        String clientNameInputFile = "D:\\Dorin\\USARB\\POO II\\Java\\Project_1\\src\\resources\\client-input.txt";
+        String clientNameOutputFile = "D:\\Dorin\\USARB\\POO II\\Java\\Project_1\\src\\resources\\client-final.txt";
+        String productsInput = "D:\\Dorin\\USARB\\POO II\\Java\\Project_1\\src\\resources\\products-input.txt";
+        String productsOutput = "D:\\Dorin\\USARB\\POO II\\Java\\Project_1\\src\\resources\\products-output.txt";
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+
+
+            System.out.println("\n1. Actions on the list of clients.");
+            System.out.println("2. Actions on the age of clients.");
+            System.out.println("3. Actions on the product list.\n");
+            System.out.println("0. Exit.\n");
+            System.out.println("What action do you want to take?\n(select a number)");
+            int action = scanner.nextInt();
+
+            switch (action) {
+                case 1 -> listOfClientNames(clientNameInputFile);
+                case 2 -> addClientsAge(clientNameInputFile, clientNameOutputFile);
+                case 3 -> ProductsProcessor(productsInput, productsOutput);
+            }
+
+            if (action == 0) break;
+        }
+
     }
 
     private static void listOfClientNames(String fileName) {
@@ -100,7 +121,7 @@ public class CollectionsUsage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Client-final.txt file has been updated successfully.");
+        System.out.println("\nClient-final.txt file has been updated successfully.");
     }
 
     private static int calculateAge(Date dob) {
@@ -112,4 +133,61 @@ public class CollectionsUsage {
         return age;
     }
 
+    private static void ProductsProcessor(String inputFilePath, String outputFilePath) {
+        HashMap<String, String> products = new HashMap<>();
+
+        // Read products from file and store in HashMap
+        try (Scanner scanner = new Scanner(new File(inputFilePath))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split("\\|");
+                products.put(parts[0].trim(), parts[1].trim());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+
+        // Add new products
+        products.put("p1234", "Banana");
+        products.put("p6789", "Peach");
+        products.put("p5432", "Apple");
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Enter product code (or type 'stop' to finish adding products): ");
+            String code = scanner.nextLine();
+
+            if (code.equals("stop")) break;
+
+            System.out.println("Enter product name: ");
+            String value = scanner.nextLine();
+
+            if (!code.isEmpty() && !value.isEmpty()) {
+                products.put(code, value);
+            } else {
+                System.out.println("Error: code and name cannot be empty. Please try again.");
+            }
+
+            System.out.println("Do you want to add another product? (y/n): ");
+            String answer = scanner.nextLine();
+
+            if (answer.equals("n")) break;
+        }
+
+
+        // Update product name for the last added product
+        ArrayList<String> codes = new ArrayList<>(products.keySet());
+        String lastCode = codes.get(codes.size() - 1);
+        System.out.println("Enter the product name for the last added product: ");
+        String update = scanner.nextLine();
+        products.put(lastCode, update);
+
+        // Write products to file
+        try (PrintWriter writer = new PrintWriter(new FileWriter(outputFilePath))) {
+            for (String key : products.keySet()) {
+                writer.printf("%s| %s%n", key, products.get(key));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
